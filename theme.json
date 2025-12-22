@@ -3,7 +3,7 @@
     "version": "v2.2.0",
     "author": "NoDataFound",
     "target": "Snippet",
-    "description": "iOS 26, Android 16, and retro battery icons. Separate border and fill colors.",
+    "description": "Android 16 Material You battery icon with customizable fill and border colors.",
     "manifest_version": 8,
     "inject": {
         "shared.css": ["SP", "QuickAccess", "MainMenu"]
