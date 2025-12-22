@@ -2,6 +2,8 @@
 
 A CSS Loader theme for Steam Deck that replaces the default battery icon with an Android 16 Material You style battery indicator.
 
+![Preview](screenshots/preview.png)
+
 ```
 Android 16 Vertical:        Android 16 Horizontal:
     ╭─╮                     ╭──────────────╮
@@ -21,6 +23,118 @@ Android 16 Vertical:        Android 16 Horizontal:
 - **Battery Level Display**: Shows current charge with semi-transparent depleted portion
 - **State Indicators**: Low battery, critical, charging, and full states with animations
 
+## Architecture
+
+```mermaid
+graph TB
+    subgraph "Theme Structure"
+        A[theme.json] --> B[shared.css]
+        A --> C[styles/]
+
+        subgraph "Style Files"
+            C --> D[android16-vertical.css]
+            C --> E[android16-horizontal.css]
+        end
+
+        subgraph "Color Overrides"
+            C --> F[color-*.css]
+            C --> G[border-*.css]
+        end
+
+        subgraph "Toggles"
+            C --> H[hide-percentage.css]
+        end
+    end
+```
+
+## How It Works
+
+```mermaid
+flowchart LR
+    subgraph "CSS Loader Injection"
+        A[Inject shared.css] --> B[Apply selected style]
+        B --> C{Color override?}
+        C -->|Yes| D[Apply color CSS]
+        C -->|No| E[Use default white]
+        D --> F{Border override?}
+        E --> F
+        F -->|Yes| G[Apply border CSS]
+        F -->|No| H[Match fill color]
+        G --> I{Hide percentage?}
+        H --> I
+        I -->|Yes| J[Apply hide-percentage.css]
+        I -->|No| K[Show percentage]
+    end
+```
+
+## Battery Element Structure
+
+```mermaid
+graph TD
+    subgraph "Steam Deck UI Element"
+        A["[class*='_3XySI']<br/>Battery Container"] --> B["::before<br/>Fill Level"]
+        A --> C["::after<br/>Battery Tip"]
+        A --> D["svg (hidden)<br/>Original Icon"]
+    end
+
+    subgraph "CSS Styling"
+        E[Container] --> F[Semi-transparent background<br/>rgba 255,255,255,0.3]
+        E --> G[Solid fill from bottom/left]
+        E --> H[Tip extends 1px out]
+    end
+```
+
+## CSS Variable System
+
+```mermaid
+graph TD
+    subgraph "shared.css Variables"
+        A["--mbt-fill-color"] --> B[Battery fill color]
+        C["--mbt-border-color"] --> D[Battery outline]
+        E["--mbt-tip-color"] --> F[Tip color]
+        G["--mbt-transition-speed"] --> H[Animation timing]
+        I["--mbt-pulse-duration"] --> J[Charging pulse]
+    end
+
+    subgraph "Color Override Files"
+        K[color-red.css] --> A
+        L[color-blue.css] --> A
+        M[color-green.css] --> A
+        N["...17 colors"] --> A
+    end
+
+    subgraph "Border Override Files"
+        O[border-red.css] --> C
+        P[border-blue.css] --> C
+        Q["...9 colors"] --> C
+    end
+```
+
+## State Transitions
+
+```mermaid
+stateDiagram-v2
+    [*] --> Normal: Battery > 20%
+    Normal --> Low: Battery <= 20%
+    Low --> Critical: Battery <= 10%
+    Critical --> Low: Battery > 10%
+    Low --> Normal: Battery > 20%
+
+    Normal --> Charging: Plugged in
+    Low --> Charging: Plugged in
+    Critical --> Charging: Plugged in
+
+    Charging --> Full: Battery = 100%
+    Full --> Normal: Unplugged
+    Charging --> Normal: Unplugged
+
+    note right of Normal: White fill
+    note right of Low: Orange fill
+    note right of Critical: Red + pulse animation
+    note right of Charging: Green + pulse animation
+    note right of Full: Full height fill
+```
+
 ## Requirements
 
 - Steam Deck with SteamOS
@@ -37,6 +151,22 @@ Android 16 Vertical:        Android 16 Horizontal:
 5. Click Install
 
 ### Manual Install
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant PC
+    participant Deck as Steam Deck
+
+    User->>PC: Download theme
+    PC->>Deck: Copy to ~/homebrew/themes/
+    User->>Deck: Open Quick Access Menu
+    Deck->>Deck: Navigate to Decky > CSS Loader
+    User->>Deck: Press Refresh
+    User->>Deck: Enable "Mobile Battery Theme"
+    Deck->>Deck: Apply CSS styling
+```
+
 1. Copy the `mobile-battery-theme` folder to:
    ```
    /home/deck/homebrew/themes/
@@ -50,34 +180,77 @@ Android 16 Vertical:        Android 16 Horizontal:
 
 After enabling the theme, use the dropdown options in CSS Loader to customize:
 
-- **Battery Style**: Choose between Vertical or Horizontal orientation
-- **Fill Color**: Select from 17 color options
-- **Border Color**: Customize the border independently
-- **Show Percentage**: Toggle the battery percentage text
-
-## CSS Variables
-
-This theme uses the `--mbt-` prefix for all CSS variables:
-
-- `--mbt-fill-color`: Battery fill color
-- `--mbt-border-color`: Battery outline color
-- `--mbt-tip-color`: Battery tip color
-- `--mbt-transition-speed`: Animation speed
-- `--mbt-pulse-duration`: Charging pulse animation duration
+| Option | Values | Description |
+|--------|--------|-------------|
+| Battery Style | Vertical, Horizontal | Orientation of battery icon |
+| Fill Color | 17 colors | Color of the battery fill |
+| Border Color | 9 colors | Color of the battery outline |
+| Show Percentage | Yes, No | Toggle percentage text |
 
 ## File Structure
 
 ```
 mobile-battery-theme/
-├── theme.json              # Theme manifest
+├── theme.json              # Theme manifest with patches
 ├── shared.css              # CSS variables and animations
 └── styles/
-    ├── android16-horizontal.css
-    ├── android16-vertical.css
-    ├── color-*.css         # Fill color options
-    ├── border-*.css        # Border color options
-    └── hide-percentage.css
+    ├── android16-vertical.css    # Vertical battery style
+    ├── android16-horizontal.css  # Horizontal battery style
+    ├── color-red.css             # Fill color overrides
+    ├── color-orange.css
+    ├── color-amber.css
+    ├── color-yellow.css
+    ├── color-lime.css
+    ├── color-green.css
+    ├── color-emerald.css
+    ├── color-teal.css
+    ├── color-cyan.css
+    ├── color-sky.css
+    ├── color-blue.css
+    ├── color-indigo.css
+    ├── color-violet.css
+    ├── color-purple.css
+    ├── color-magenta.css
+    ├── color-pink.css
+    ├── color-rose.css
+    ├── border-red.css            # Border color overrides
+    ├── border-orange.css
+    ├── border-yellow.css
+    ├── border-green.css
+    ├── border-cyan.css
+    ├── border-blue.css
+    ├── border-purple.css
+    ├── border-pink.css
+    ├── border-white.css
+    └── hide-percentage.css       # Toggle percentage visibility
 ```
+
+## Customization
+
+### Creating Custom Colors
+
+Create a new file `styles/color-custom.css`:
+
+```css
+:root {
+    --mbt-fill-color: #YOUR_HEX !important;
+}
+```
+
+Then add to `theme.json` under "Fill Color" > "values":
+
+```json
+"Custom": { "styles/color-custom.css": ["SP", "QuickAccess", "MainMenu"] }
+```
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Theme not appearing | Verify theme.json is valid JSON, refresh CSS Loader |
+| Battery unchanged | Check if CSS Loader is enabled and theme is active |
+| Colors not applying | Ensure color CSS loads after main style CSS |
+| Percentage won't hide | Toggle the option off and refresh |
 
 ## License
 
