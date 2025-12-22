@@ -1,5 +1,11 @@
 # Mobile Battery Theme
 
+[![GitHub release](https://img.shields.io/github/v/release/NoDataFound/mobile-battery-theme?style=flat-square)](https://github.com/NoDataFound/mobile-battery-theme/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Steam Deck](https://img.shields.io/badge/Steam%20Deck-Compatible-1a9fff?style=flat-square&logo=steam)](https://store.steampowered.com/steamdeck)
+[![CSS Loader](https://img.shields.io/badge/CSS%20Loader-Theme-blueviolet?style=flat-square)](https://deckthemes.com/)
+[![DeckThemes](https://img.shields.io/badge/DeckThemes-Available-green?style=flat-square)](https://deckthemes.com/)
+
 A CSS Loader theme for Steam Deck that replaces the default battery icon with an Android 16 Material You style battery indicator.
 
 ![Preview](screenshots/preview.png)
