@@ -2,12 +2,9 @@
  * Pill/Capsule Vertical Battery Style
  *
  * Very rounded, pill-shaped battery:
- *     ╭───╮
- *    ╭─────╮
- *   (  ███  )
- *   (  ███  )
- *   (  ░░░  )
- *    ╰─────╯
+ *   (███)
+ *   (███)
+ *   (░░░)
  *
  * Features:
  * - Highly rounded pill shape
@@ -28,12 +25,11 @@
 /* Main battery container - pill shape */
 [class*="_3XySI"] {
     position: relative !important;
-    width: 18px !important;
-    height: 36px !important;
+    width: 10px !important;
+    height: 16px !important;
     background: transparent !important;
-    border: 2.5px solid var(--mbt-fill-color, #ffffff) !important;
-    /* Very rounded - pill shape */
-    border-radius: 10px !important;
+    border: 1.5px solid var(--mbt-border-color, #ffffff) !important;
+    border-radius: 5px !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
@@ -45,7 +41,7 @@
     overflow: hidden !important;
 }
 
-/* No tip for pill style - hide it */
+/* No tip for pill style */
 [class*="_3XySI"]::after {
     display: none !important;
 }
@@ -54,14 +50,14 @@
 [class*="_3XySI"]::before {
     content: '' !important;
     position: absolute !important;
-    left: 2px !important;
-    right: 2px !important;
-    bottom: 2px !important;
+    left: 0.01px !important;
+    right: 0.01px !important;
+    bottom: 0.01px !important;
     z-index: 1 !important;
-    height: calc(var(--battery-perc, 75) * 1% - 4px) !important;
-    max-height: calc(100% - 4px) !important;
+    height: 75% !important;
+    max-height: calc(100% - 0.02px) !important;
     background: var(--mbt-fill-color, #ffffff) !important;
-    border-radius: 6px !important;
+    border-radius: 3.5px !important;
     transition: height 0.3s ease, background 0.3s ease !important;
 }
 

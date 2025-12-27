@@ -28,12 +28,11 @@
 /* Main battery container - macOS vertical style */
 [class*="_3XySI"] {
     position: relative !important;
-    width: 14px !important;
-    height: 28px !important;
+    width: 10px !important;
+    height: 16px !important;
     background: rgba(255, 255, 255, 0.25) !important;
     border: none !important;
-    /* Very rounded ends like macOS */
-    border-radius: 4px !important;
+    border-radius: 2.5px !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
@@ -45,31 +44,31 @@
     overflow: visible !important;
 }
 
-/* Battery tip - small rounded nub on top */
+/* Battery tip - small rounded nub on top, 0.25px gap */
 [class*="_3XySI"]::after {
     content: '' !important;
     position: absolute !important;
-    top: -3px !important;
+    top: -2.25px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    width: 6px !important;
+    width: 4px !important;
     height: 2px !important;
-    background: rgba(255, 255, 255, 0.4) !important;
-    border-radius: 2px 2px 0 0 !important;
+    background: var(--mbt-tip-color, rgba(255, 255, 255, 0.4)) !important;
+    border-radius: 1px 1px 0 0 !important;
 }
 
 /* Battery fill - solid with rounded bottom */
 [class*="_3XySI"]::before {
     content: '' !important;
     position: absolute !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
+    left: 0.01px !important;
+    right: 0.01px !important;
+    bottom: 0.01px !important;
     z-index: 1 !important;
-    height: calc(var(--battery-perc, 75) * 1%) !important;
-    max-height: 100% !important;
+    height: 75% !important;
+    max-height: calc(100% - 0.02px) !important;
     background: var(--mbt-fill-color, #ffffff) !important;
-    border-radius: 4px !important;
+    border-radius: 2.4px !important;
     transition: height 0.3s ease, background 0.3s ease !important;
 }
 

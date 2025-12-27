@@ -48,16 +48,16 @@
     overflow: visible !important;
 }
 
-/* Battery tip - top, no gap */
+/* Battery tip - top, 0.25px gap */
 [class*="_3XySI"]::after {
     content: '' !important;
     position: absolute !important;
-    top: -2px !important;
+    top: -2.25px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     width: 4px !important;
     height: 2px !important;
-    background: rgba(255, 255, 255, 0.3) !important;
+    background: var(--mbt-tip-color, rgba(255, 255, 255, 0.3)) !important;
     border-radius: 1px 1px 0 0 !important;
     opacity: 1 !important;
 }

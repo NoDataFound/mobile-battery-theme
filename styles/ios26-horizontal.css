@@ -44,11 +44,11 @@
     overflow: visible !important;
 }
 
-/* Battery tip - right side */
+/* Battery tip - right side, 0.25px gap */
 [class*="_3XySI"]::after {
     content: '' !important;
     position: absolute !important;
-    right: -2px !important;
+    right: -2.25px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     width: 2px !important;

@@ -48,11 +48,11 @@
     overflow: visible !important;
 }
 
-/* Battery tip - top, small rounded nub */
+/* Battery tip - top, 0.25px gap */
 [class*="_3XySI"]::after {
     content: '' !important;
     position: absolute !important;
-    top: -2px !important;
+    top: -2.25px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     width: 4px !important;
