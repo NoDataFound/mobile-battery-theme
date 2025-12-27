@@ -64,6 +64,129 @@ iOS-style with separated nub and lightning bolt when charging.
 - **Battery Level Display**: Shows current charge with semi-transparent depleted portion
 - **State Indicators**: Low battery (orange), critical (red pulse), charging (green with lightning bolt), and full states
 
+## Architecture
+
+```mermaid
+graph TB
+    subgraph "Theme Structure"
+        A[theme.json] --> B[shared.css]
+        A --> C[styles/]
+
+        subgraph "Style Files"
+            C --> D[android16-vertical.css]
+            C --> E[android16-horizontal.css]
+            C --> F[android16-v2-vertical.css]
+            C --> G[android16-v2-horizontal.css]
+            C --> H[ios26-vertical.css]
+            C --> I[ios26-horizontal.css]
+            C --> J[macos-vertical.css]
+            C --> K[macos-horizontal.css]
+            C --> L[pill-vertical.css]
+            C --> M[pill-horizontal.css]
+            C --> N[segmented-vertical.css]
+            C --> O[segmented-horizontal.css]
+        end
+
+        subgraph "Color Overrides"
+            C --> P[color-*.css]
+            C --> Q[border-*.css]
+        end
+
+        subgraph "Toggles"
+            C --> R[show-percentage.css]
+            C --> S[hide-percentage.css]
+        end
+    end
+```
+
+## How It Works
+
+```mermaid
+flowchart LR
+    subgraph "CSS Loader Injection"
+        A[Inject shared.css] --> B[Apply selected style]
+        B --> C{Color override?}
+        C -->|Yes| D[Apply color CSS]
+        C -->|No| E[Use default white]
+        D --> F{Border override?}
+        E --> F
+        F -->|Yes| G[Apply border CSS]
+        F -->|No| H[Match fill color]
+        G --> I{Hide percentage?}
+        H --> I
+        I -->|Yes| J[Apply hide-percentage.css]
+        I -->|No| K[Show percentage]
+    end
+```
+
+## Battery Element Structure
+
+```mermaid
+graph TD
+    subgraph "Steam Deck UI Element"
+        A["[class*='_3XySI']<br/>Battery Container"] --> B["::before<br/>Fill Level"]
+        A --> C["::after<br/>Battery Tip"]
+        A --> D["svg (hidden)<br/>Original Icon"]
+    end
+
+    subgraph "CSS Styling"
+        E[Container] --> F[Semi-transparent background<br/>rgba 255,255,255,0.3]
+        E --> G[Solid fill from bottom/left]
+        E --> H[Tip extends 1px out]
+    end
+```
+
+## CSS Variable System
+
+```mermaid
+graph TD
+    subgraph "shared.css Variables"
+        A["--mbt-fill-color"] --> B[Battery fill color]
+        C["--mbt-border-color"] --> D[Battery outline]
+        E["--mbt-tip-color"] --> F[Tip color]
+        G["--mbt-transition-speed"] --> H[Animation timing]
+        I["--mbt-pulse-duration"] --> J[Charging pulse]
+    end
+
+    subgraph "Color Override Files"
+        K[color-red.css] --> A
+        L[color-blue.css] --> A
+        M[color-green.css] --> A
+        N["...17 colors"] --> A
+    end
+
+    subgraph "Border Override Files"
+        O[border-red.css] --> C
+        P[border-blue.css] --> C
+        Q["...9 colors"] --> C
+    end
+```
+
+## State Transitions
+
+```mermaid
+stateDiagram-v2
+    [*] --> Normal: Battery > 20%
+    Normal --> Low: Battery <= 20%
+    Low --> Critical: Battery <= 10%
+    Critical --> Low: Battery > 10%
+    Low --> Normal: Battery > 20%
+
+    Normal --> Charging: Plugged in
+    Low --> Charging: Plugged in
+    Critical --> Charging: Plugged in
+
+    Charging --> Full: Battery = 100%
+    Full --> Normal: Unplugged
+    Charging --> Normal: Unplugged
+
+    note right of Normal: White fill
+    note right of Low: Orange fill
+    note right of Critical: Red + pulse animation
+    note right of Charging: Green + pulse animation
+    note right of Full: Full height fill
+```
+
 ## Requirements
 
 - Steam Deck with SteamOS
@@ -80,6 +203,21 @@ iOS-style with separated nub and lightning bolt when charging.
 5. Click Install
 
 ### Manual Install
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant PC
+    participant Deck as Steam Deck
+
+    User->>PC: Download theme
+    PC->>Deck: Copy to ~/homebrew/themes/
+    User->>Deck: Open Quick Access Menu
+    Deck->>Deck: Navigate to Decky > CSS Loader
+    User->>Deck: Press Refresh
+    User->>Deck: Enable "Mobile Battery Theme"
+    Deck->>Deck: Apply CSS styling
+```
 
 1. Copy the `mobile-battery-theme` folder to:
    ```
