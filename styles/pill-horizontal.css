@@ -1,0 +1,98 @@
+/*
+ * Pill/Capsule Horizontal Battery Style
+ *
+ * Very rounded, pill-shaped horizontal battery:
+ * ╭─────────────────╮
+ * (  ████████░░░░░  )
+ * ╰─────────────────╯
+ *
+ * Features:
+ * - Highly rounded pill shape
+ * - Thick outline border
+ * - Liquid-style fill with color gradients
+ * - No tip/nub (modern minimal look)
+ */
+
+/* Hide original SVG battery */
+[class*="_3XySI"] svg,
+[class*="_3XySI"] > svg,
+[class*="_3XySI"] canvas {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Main battery container - horizontal pill shape */
+[class*="_3XySI"] {
+    position: relative !important;
+    width: 36px !important;
+    height: 18px !important;
+    background: transparent !important;
+    border: 2.5px solid var(--mbt-fill-color, #ffffff) !important;
+    /* Very rounded - pill shape */
+    border-radius: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    margin-right: 4px !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+}
+
+/* No tip for pill style - hide it */
+[class*="_3XySI"]::after {
+    display: none !important;
+}
+
+/* Battery fill - rounded pill interior */
+[class*="_3XySI"]::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 2px !important;
+    top: 2px !important;
+    bottom: 2px !important;
+    z-index: 1 !important;
+    width: calc(var(--battery-perc, 75) * 1% - 4px) !important;
+    max-width: calc(100% - 4px) !important;
+    background: var(--mbt-fill-color, #ffffff) !important;
+    border-radius: 6px !important;
+    transition: width 0.3s ease, background 0.3s ease !important;
+}
+
+/* Charging - green gradient */
+[class*="_3XySI"][class*="Charging"]::before,
+[class*="_3XySI"][class*="charging"]::before {
+    background: linear-gradient(to right, #2ecc71, #58d68d) !important;
+}
+[class*="_3XySI"][class*="Charging"],
+[class*="_3XySI"][class*="charging"] {
+    border-color: #2ecc71 !important;
+}
+
+/* Low battery - yellow/orange gradient */
+[class*="_3XySI"][class*="Low"]::before,
+[class*="_3XySI"][class*="low"]::before {
+    background: linear-gradient(to right, #f39c12, #f7dc6f) !important;
+}
+[class*="_3XySI"][class*="Low"],
+[class*="_3XySI"][class*="low"] {
+    border-color: #f39c12 !important;
+}
+
+/* Critical - red gradient with pulse */
+[class*="_3XySI"][class*="Critical"]::before,
+[class*="_3XySI"][class*="critical"]::before {
+    background: linear-gradient(to right, #e74c3c, #ec7063) !important;
+    animation: mbt-critical-pulse 1s ease-in-out infinite !important;
+}
+[class*="_3XySI"][class*="Critical"],
+[class*="_3XySI"][class*="critical"] {
+    border-color: #e74c3c !important;
+}
+
+@keyframes mbt-critical-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}

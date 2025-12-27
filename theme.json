@@ -1,9 +1,9 @@
 {
     "name": "Mobile Battery Theme",
-    "version": "v3.0.0",
+    "version": "v3.1.0",
     "author": "NoDataFound",
     "target": "Snippet",
-    "description": "iOS/Android style battery with percentage inside, charging animation, and smart color overrides.",
+    "description": "iOS/Android/macOS style batteries with percentage display, charging animations, and smart color overrides.",
     "manifest_version": 8,
     "inject": {
         "shared.css": ["SP", "QuickAccess", "MainMenu"]
@@ -13,10 +13,16 @@
             "default": "Android 16 Vertical",
             "type": "dropdown",
             "values": {
-                "Android 16 Horizontal ═══╤╗": { "styles/android16-horizontal.css": ["SP", "QuickAccess", "MainMenu"] },
+                "Android 16 Horizontal ═══╤": { "styles/android16-horizontal.css": ["SP", "QuickAccess", "MainMenu"] },
                 "Android 16 Vertical ║": { "styles/android16-vertical.css": ["SP", "QuickAccess", "MainMenu"] },
                 "iOS 26 Horizontal ▭": { "styles/ios26-horizontal.css": ["SP", "QuickAccess", "MainMenu"] },
-                "iOS 26 Vertical ▯": { "styles/ios26-vertical.css": ["SP", "QuickAccess", "MainMenu"] }
+                "iOS 26 Vertical ▯": { "styles/ios26-vertical.css": ["SP", "QuickAccess", "MainMenu"] },
+                "macOS Horizontal ▬": { "styles/macos-horizontal.css": ["SP", "QuickAccess", "MainMenu"] },
+                "macOS Vertical |": { "styles/macos-vertical.css": ["SP", "QuickAccess", "MainMenu"] },
+                "Pill Horizontal ⬭": { "styles/pill-horizontal.css": ["SP", "QuickAccess", "MainMenu"] },
+                "Pill Vertical ⬯": { "styles/pill-vertical.css": ["SP", "QuickAccess", "MainMenu"] },
+                "Segmented Horizontal ▤": { "styles/segmented-horizontal.css": ["SP", "QuickAccess", "MainMenu"] },
+                "Segmented Vertical ▥": { "styles/segmented-vertical.css": ["SP", "QuickAccess", "MainMenu"] }
             }
         },
         "Fill Color": {
