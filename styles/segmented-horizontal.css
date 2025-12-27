@@ -74,15 +74,18 @@
 
 /* Charging - green */
 [class*="_3XySI"][class*="Charging"]::before,
-[class*="_3XySI"][class*="charging"]::before {
+[class*="_3XySI"][class*="charging"]::before,
+[class*="_3XySI"][class*="Charging"]::before {
     background: #4cd964 !important;
 }
 [class*="_3XySI"][class*="Charging"],
-[class*="_3XySI"][class*="charging"] {
+[class*="_3XySI"][class*="charging"],
+[class*="_3XySI"][class*="Charging"] {
     border-color: #4cd964 !important;
 }
 [class*="_3XySI"][class*="Charging"]::after,
-[class*="_3XySI"][class*="charging"]::after {
+[class*="_3XySI"][class*="charging"]::after,
+[class*="_3XySI"][class*="Charging"]::after {
     background: #4cd964 !important;
 }
 

@@ -58,11 +58,13 @@
 
 /* Charging - green gradient */
 [class*="_3XySI"][class*="Charging"]::before,
-[class*="_3XySI"][class*="charging"]::before {
+[class*="_3XySI"][class*="charging"]::before,
+[class*="_3XySI"][class*="Charging"]::before {
     background: linear-gradient(to right, #2ecc71, #58d68d) !important;
 }
 [class*="_3XySI"][class*="Charging"],
-[class*="_3XySI"][class*="charging"] {
+[class*="_3XySI"][class*="charging"],
+[class*="_3XySI"][class*="Charging"] {
     border-color: #2ecc71 !important;
 }
 
