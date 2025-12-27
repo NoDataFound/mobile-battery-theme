@@ -50,14 +50,13 @@
 [class*="_3XySI"]::before {
     content: '' !important;
     position: absolute !important;
-    left: 2px !important;
-    top: 2px !important;
-    bottom: 2px !important;
-    right: 2px !important;
+    left: 1.5px !important;
+    top: 1.5px !important;
+    bottom: 1.5px !important;
+    right: 1.5px !important;
     z-index: 1 !important;
-    width: auto !important;
     background: var(--mbt-fill-color, #ffffff) !important;
-    border-radius: 1.5px !important;
+    border-radius: 1px !important;
     transition: background 0.3s ease !important;
 }
 
