@@ -57,12 +57,12 @@
     left: 0.5px !important;
     right: 0.5px !important;
     bottom: 0.5px !important;
+    top: 0.5px !important;
     z-index: 1 !important;
-    height: 75% !important;
-    max-height: calc(100% - 1px) !important;
+    height: auto !important;
     background: var(--mbt-fill-color, #ffffff) !important;
     border-radius: 1.5px !important;
-    transition: height 0.3s ease, background 0.3s ease !important;
+    transition: background 0.3s ease !important;
 }
 
 /* Low battery - red fill */
@@ -87,6 +87,5 @@
 /* Full battery */
 [class*="_3XySI"].full::before,
 [class*="_3XySI"][class*="full"]::before {
-    height: calc(100% - 1px) !important;
     background: var(--mbt-fill-color, #ffffff) !important;
 }
