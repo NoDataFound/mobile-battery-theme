@@ -1,15 +1,10 @@
 /*
  * iOS 26 Horizontal Battery Style
  *
- * Modern iOS battery design:
- * ╭──────────────╮╮
- * │ ████████░░░░ ││
- * ╰──────────────╯╯
- *
- * Features:
- * - Rounded rectangle with smooth corners
- * - Clean minimal design
- * - Small rounded tip on right side
+ * Modern iOS battery design from screenshots:
+ * ╭────────────────────╮╮
+ * │ ██████████████░░░░ ││
+ * ╰────────────────────╯╯
  */
 
 /* Hide original SVG battery */
@@ -21,90 +16,73 @@
     opacity: 0 !important;
 }
 
-/* Main battery container - iOS 26 horizontal style */
-/* Same size as Android but with outline style */
+/* Main battery container - iOS style from screenshot */
 [class*="_3XySI"] {
     position: relative !important;
-    width: 20px !important;
-    height: 12px !important;
+    width: 25px !important;
+    height: 11px !important;
     background: transparent !important;
-    border: 1px solid var(--mbt-border-color, #ffffff) !important;
-
-    /* Rounded rectangle - match Android */
+    border: 1.5px solid var(--mbt-border-color, rgba(255, 255, 255, 0.4)) !important;
     border-radius: 3px !important;
-
     display: flex !important;
     align-items: center !important;
     padding: 0 !important;
     box-sizing: border-box !important;
     margin-right: 4px !important;
-
-    /* Clean look */
     box-shadow: none !important;
     overflow: visible !important;
 }
 
-/* Battery tip - right side, 0.25px gap */
+/* Battery tip - small rounded nub on right */
 [class*="_3XySI"]::after {
     content: '' !important;
     position: absolute !important;
     right: -3px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    width: 2px !important;
+    width: 1.5px !important;
     height: 4px !important;
-    background: var(--mbt-tip-color, #ffffff) !important;
-    border-radius: 0 1.5px 1.5px 0 !important;
-    opacity: 1 !important;
+    background: var(--mbt-border-color, rgba(255, 255, 255, 0.4)) !important;
+    border-radius: 0 1px 1px 0 !important;
 }
 
 /* Battery fill level */
 [class*="_3XySI"]::before {
     content: '' !important;
     position: absolute !important;
-    left: 1px !important;
-    top: 1px !important;
-    bottom: 1px !important;
+    left: 2px !important;
+    top: 2px !important;
+    bottom: 2px !important;
     z-index: 1 !important;
-
-    /* Default 75% fill - starts from left, grows right */
-    width: calc(75% - 2px) !important;
-    max-width: calc(100% - 2px) !important;
-
-    /* Fill color from variable */
+    width: calc(75% - 4px) !important;
+    max-width: calc(100% - 4px) !important;
     background: var(--mbt-fill-color, #ffffff) !important;
-
-    /* Minimal rounding */
-    border-radius: 2px !important;
-
-    transition: width var(--mbt-transition-speed) var(--mbt-transition-easing),
-                background var(--mbt-transition-speed) var(--mbt-transition-easing) !important;
+    border-radius: 1.5px !important;
+    transition: width 0.3s ease, background 0.3s ease !important;
 }
 
-/* Low battery */
+/* Low battery - red fill */
 [class*="_3XySI"].low::before,
 [class*="_3XySI"][class*="low"]::before {
     background: #ff3b30 !important;
-    width: calc(20% - 2px) !important;
 }
 
-/* Critical battery */
+/* Critical battery - red with pulse */
 [class*="_3XySI"].critical::before,
 [class*="_3XySI"][class*="critical"]::before {
-    background: #ff2d55 !important;
+    background: #ff3b30 !important;
     animation: mbt-charging-pulse 1s ease-in-out infinite !important;
 }
 
-/* Charging state */
+/* Charging state - green fill */
 [class*="_3XySI"].charging::before,
 [class*="_3XySI"][class*="charging"]::before {
     background: #34c759 !important;
-    animation: mbt-charging-pulse var(--mbt-pulse-duration) ease-in-out infinite !important;
 }
 
 /* Full battery */
 [class*="_3XySI"].full::before,
 [class*="_3XySI"][class*="full"]::before {
-    width: calc(100% - 2px) !important;
+    width: calc(100% - 4px) !important;
     background: var(--mbt-fill-color, #ffffff) !important;
 }
