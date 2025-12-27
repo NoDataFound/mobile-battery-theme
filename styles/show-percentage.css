@@ -1,48 +1,31 @@
 /*
- * Show Battery Percentage INSIDE Battery
+ * Show Battery Percentage NEXT TO Battery
  *
- * Positions the percentage number inside the battery container
- * like iOS/Android style:
- *
- * Horizontal:           Vertical:
- * ╭──────────────╮         ╭─╮
- * │ 87  ████████ ├─╮     ╭───╮
- * ╰──────────────╯─╯     │ 87│
- *                        │███│
- *                        ╰───╯
+ * Displays percentage number beside the battery icon
  */
 
-/* Style the percentage text to appear inside battery */
+/* Style the percentage text to appear next to battery */
 [class*="BatteryPercentage"],
 [class*="batteryPercentage"],
 [class*="_percentage"],
 [class*="Percentage"] {
-    position: absolute !important;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
     z-index: 10 !important;
 
-    /* Typography - bold condensed for readability */
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Roboto Condensed', sans-serif !important;
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.5px !important;
+    /* Typography */
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Roboto', sans-serif !important;
+    font-size: 8px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.3px !important;
 
-    /* Dark text for contrast against fill */
-    color: rgba(0, 0, 0, 0.7) !important;
+    /* White text */
+    color: #ffffff !important;
 
-    /* Remove any margin that pushes it outside */
-    margin: 0 !important;
+    /* Position next to battery */
+    margin-left: 4px !important;
     padding: 0 !important;
-
-    /* Center in battery */
-    left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%) !important;
-
-    /* Text shadow for legibility */
-    text-shadow: 0 0 2px rgba(255, 255, 255, 0.5) !important;
 }
 
 /* When charging, percentage turns green */
@@ -54,10 +37,10 @@
 [class*="charging"] [class*="batteryPercentage"],
 [class*="charging"] [class*="_percentage"],
 [class*="charging"] [class*="Percentage"] {
-    color: #1b5e20 !important; /* dark green */
+    color: #34c759 !important;
 }
 
-/* When low battery, percentage turns orange */
+/* When low battery, percentage turns yellow */
 [class*="Low"] [class*="BatteryPercentage"],
 [class*="Low"] [class*="batteryPercentage"],
 [class*="Low"] [class*="_percentage"],
@@ -66,7 +49,7 @@
 [class*="low"] [class*="batteryPercentage"],
 [class*="low"] [class*="_percentage"],
 [class*="low"] [class*="Percentage"] {
-    color: #e65100 !important; /* dark orange */
+    color: #f9a825 !important;
 }
 
 /* When critical battery, percentage turns red */
@@ -78,5 +61,5 @@
 [class*="critical"] [class*="batteryPercentage"],
 [class*="critical"] [class*="_percentage"],
 [class*="critical"] [class*="Percentage"] {
-    color: #b71c1c !important; /* dark red */
+    color: #ff3b30 !important;
 }

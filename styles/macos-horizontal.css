@@ -49,7 +49,7 @@
     transform: translateY(-50%) !important;
     width: 2px !important;
     height: 6px !important;
-    background: var(--mbt-tip-color, rgba(255, 255, 255, 0.4)) !important;
+    background: rgba(255, 255, 255, 0.4) !important;
     border-radius: 0 1.5px 1.5px 0 !important;
 }
 

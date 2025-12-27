@@ -57,7 +57,7 @@
     transform: translateX(-50%) !important;
     width: 4px !important;
     height: 2px !important;
-    background: var(--mbt-tip-color, rgba(255, 255, 255, 0.3)) !important;
+    background: rgba(255, 255, 255, 0.3) !important;
     border-radius: 1px 1px 0 0 !important;
     opacity: 1 !important;
 }
