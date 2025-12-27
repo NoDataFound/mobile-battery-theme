@@ -1,9 +1,9 @@
 {
     "name": "Mobile Battery Theme",
-    "version": "v2.2.0",
+    "version": "v3.0.0",
     "author": "NoDataFound",
     "target": "Snippet",
-    "description": "Android 16 Material You battery icon with customizable fill and border colors.",
+    "description": "iOS/Android style battery with percentage inside, charging animation, and smart color overrides.",
     "manifest_version": 8,
     "inject": {
         "shared.css": ["SP", "QuickAccess", "MainMenu"]
@@ -13,8 +13,10 @@
             "default": "Android 16 Vertical",
             "type": "dropdown",
             "values": {
-                "Android 16 Horizontal": { "styles/android16-horizontal.css": ["SP", "QuickAccess", "MainMenu"] },
-                "Android 16 Vertical": { "styles/android16-vertical.css": ["SP", "QuickAccess", "MainMenu"] }
+                "Android 16 Horizontal ═══╤╗": { "styles/android16-horizontal.css": ["SP", "QuickAccess", "MainMenu"] },
+                "Android 16 Vertical ║": { "styles/android16-vertical.css": ["SP", "QuickAccess", "MainMenu"] },
+                "iOS 26 Horizontal ▭": { "styles/ios26-horizontal.css": ["SP", "QuickAccess", "MainMenu"] },
+                "iOS 26 Vertical ▯": { "styles/ios26-vertical.css": ["SP", "QuickAccess", "MainMenu"] }
             }
         },
         "Fill Color": {
@@ -58,10 +60,10 @@
             }
         },
         "Show Percentage": {
-            "default": "Yes",
+            "default": "Yes (Inside Battery)",
             "type": "dropdown",
             "values": {
-                "Yes": {},
+                "Yes (Inside Battery)": { "styles/show-percentage.css": ["SP", "QuickAccess", "MainMenu"] },
                 "No": { "styles/hide-percentage.css": ["SP", "QuickAccess", "MainMenu"] }
             }
         }
