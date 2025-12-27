@@ -66,20 +66,20 @@
 [class*="_3XySI"]::before {
     content: '' !important;
     position: absolute !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
+    left: 0.01px !important;
+    right: 0.01px !important;
+    bottom: 0.01px !important;
     z-index: 1 !important;
 
     /* Default 75% fill */
     height: 75% !important;
-    max-height: 100% !important;
+    max-height: calc(100% - 0.02px) !important;
 
     /* Fill color from variable */
     background: var(--mbt-fill-color, #ffffff) !important;
 
     /* Match container rounding */
-    border-radius: 2.5px !important;
+    border-radius: 2.4px !important;
 
     transition: height var(--mbt-transition-speed) var(--mbt-transition-easing),
                 background var(--mbt-transition-speed) var(--mbt-transition-easing) !important;
